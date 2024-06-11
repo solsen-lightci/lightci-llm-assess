@@ -2,13 +2,14 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const port = process.argv.slice(2)[0] || 3000;
+const port = Number(process.argv.slice(2)[0]) || 3000;
 
 app.use(cors());
 app.use(express.json());
 
 app.post("/messages", async (req, res) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
+
   const { messages } = req.body;
 
   if (!Array.isArray(messages)) {
