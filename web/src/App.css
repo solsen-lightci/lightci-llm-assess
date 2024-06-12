@@ -38,6 +38,7 @@
   align-self: flex-start;
   background-color: #4c4c4c;
   text-align: left;
+  animation: fade-in 0.6s ease-in;
 }
 
 .input-container {
@@ -61,4 +62,13 @@
   background-color: #4caf50;
   color: white;
   cursor: pointer;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

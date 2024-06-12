@@ -26,7 +26,7 @@ const ChatInterface = () => {
       if (messageContainer) {
         messageContainer.scrollTop = messageContainer.scrollHeight;
       }
-    }, 200);
+    }, 100);
   }, [response]);
 
   const handleSubmitMessage = () => {
@@ -57,6 +57,7 @@ const ChatInterface = () => {
           </div>
         ))}
       </div>
+
       <div className="input-container">
         <input
           type="text"
@@ -64,7 +65,9 @@ const ChatInterface = () => {
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder="Type your message..."
+          autoFocus
         />
+
         <button onClick={handleSubmitMessage} disabled={loading}>
           Submit
         </button>
