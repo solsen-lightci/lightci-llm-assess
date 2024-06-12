@@ -1,5 +1,7 @@
 # LightCI LLM
 
+![chat](screenshot1.png)
+
 ## Setup Instructions
 
 ### Web

@@ -35,6 +35,10 @@ const ChatInterface = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") handleSubmitMessage();
+  };
+
   return (
     <div className="chat-interface">
       <div className="message-container">
@@ -49,6 +53,7 @@ const ChatInterface = () => {
           type="text"
           value={inputValue}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           placeholder="Type your message..."
         />
         <button onClick={handleSubmitMessage} disabled={loading}>
