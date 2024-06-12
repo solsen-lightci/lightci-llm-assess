@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { Message } from "./App";
 
-// create a fetch hook that calls the POST messages endpoint with the message data. The hook should return a function that accepts a message string and returns a promise that resolves with the response data. The hook should also handle the loading state of the request.
-// The hook should be used in the ChatInterface component to send messages to the server.
-
-export default () => {
+export default function useAPI() {
   const [loading, setLoading] = useState(false);
 
   const sendMessages = async (messages: Message[]) => {
@@ -26,4 +23,4 @@ export default () => {
   };
 
   return { loading, sendMessages };
-};
+}
