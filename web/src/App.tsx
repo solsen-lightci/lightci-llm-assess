@@ -13,14 +13,21 @@ const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleInputChange: ReactEventHandler = (e: any) => {
-    setInputValue(e.target.value);
+  const handleInputChange: ReactEventHandler<HTMLInputElement> = (e) => {
+    setInputValue(e.currentTarget.value);
   };
 
   const handleAPIMessage = async (newMessages: Message[]) => {
     const messages = await sendMessages(newMessages);
     setMessages(() => messages);
+
+    // HACK: scroll to the bottom of the chat after messages updates
+    setTimeout(() => {
+      const messageContainer = document.querySelector(".message-container");
+      if (messageContainer) {
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+      }
+    }, 200);
   };
 
   const handleSubmitMessage = () => {

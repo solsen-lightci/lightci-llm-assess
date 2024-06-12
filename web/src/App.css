@@ -13,11 +13,12 @@
 }
 
 .message-container {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   padding: 10px;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  scroll-behavior: smooth;
 }
 
 .message {
