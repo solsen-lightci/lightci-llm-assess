@@ -1,5 +1,6 @@
 {
   "name": "llm-chat-web",
+  "description": "web-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",

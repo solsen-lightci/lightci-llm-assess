@@ -15,7 +15,7 @@ npm run dev
 ```terminal
 cd api
 npm install
-npm start
+npm run dev
 ```
 
 ## Task Instructions
