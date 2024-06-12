@@ -3,24 +3,34 @@ import { Message } from "./App";
 
 export default function useAPI() {
   const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState<Message[]>([]);
+  const [error, setError] = useState<Error | null>(null);
 
   const sendMessages = async (messages: Message[]) => {
     setLoading(true);
-    const response = await fetch("http://localhost:3000/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ messages }),
-    });
-    setLoading(false);
+    setError(null);
 
-    if (!response.ok) {
-      throw new Error("Failed to send messages.");
+    try {
+      const response = await fetch("http://localhost:3000/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ messages }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send messages.");
+      }
+
+      const data = await response.json();
+      setResponse(data.messages);
+    } catch (error: unknown) {
+      setError(error as Error);
+    } finally {
+      setLoading(false);
     }
-
-    return (await response.json()).messages as Message[];
   };
 
-  return { loading, sendMessages };
+  return { loading, response, error, sendMessages };
 }

@@ -1,4 +1,4 @@
-import { ReactEventHandler, useState } from "react";
+import { ReactEventHandler, useEffect, useState } from "react";
 
 import useAPI from "./useAPI";
 import "./App.css";
@@ -9,7 +9,7 @@ export type Message = {
 };
 
 const ChatInterface = () => {
-  const { loading, sendMessages } = useAPI();
+  const { loading, response, sendMessages } = useAPI();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -17,9 +17,8 @@ const ChatInterface = () => {
     setInputValue(e.currentTarget.value);
   };
 
-  const handleSendAPIMessage = async (newMessages: Message[]) => {
-    const messages = await sendMessages(newMessages);
-    setMessages(() => messages);
+  useEffect(() => {
+    setMessages(response);
 
     // HACK: scroll to the bottom of the chat after messages updates
     setTimeout(() => {
@@ -28,7 +27,7 @@ const ChatInterface = () => {
         messageContainer.scrollTop = messageContainer.scrollHeight;
       }
     }, 200);
-  };
+  }, [response]);
 
   const handleSubmitMessage = () => {
     if (!loading && inputValue.trim()) {
@@ -36,8 +35,11 @@ const ChatInterface = () => {
         ...messages,
         { role: "user", text: inputValue.trim() },
       ];
+      // Set current messages
       setMessages(() => newMessages);
-      handleSendAPIMessage(newMessages);
+      // Send messages to the server for a response
+      sendMessages(newMessages);
+      // Reset the input value
       setInputValue("");
     }
   };
