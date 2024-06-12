@@ -17,7 +17,7 @@ const ChatInterface = () => {
     setInputValue(e.currentTarget.value);
   };
 
-  const handleAPIMessage = async (newMessages: Message[]) => {
+  const handleSendAPIMessage = async (newMessages: Message[]) => {
     const messages = await sendMessages(newMessages);
     setMessages(() => messages);
 
@@ -37,7 +37,7 @@ const ChatInterface = () => {
         { role: "user", text: inputValue.trim() },
       ];
       setMessages(() => newMessages);
-      handleAPIMessage(newMessages);
+      handleSendAPIMessage(newMessages);
       setInputValue("");
     }
   };
