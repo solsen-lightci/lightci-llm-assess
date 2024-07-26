@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 const port = Number(process.env.PORT) || 3000;
 
@@ -21,6 +23,8 @@ app.post("/messages", async (req, res) => {
   if (latestUserMessage.role !== "user") {
     return res.status(400).json({ error: "Invalid role, not user" });
   }
+
+  /* OPENAI LLM CODE GOES HERE */
 
   const newMessage = {
     role: "assistant",

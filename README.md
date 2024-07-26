@@ -4,7 +4,7 @@
 
 ## Setup Instructions
 
-### Web
+### Web (React TS)
 
 ```terminal
 cd web
@@ -12,13 +12,15 @@ npm install
 npm run dev
 ```
 
-### API
+### API (Express JS)
 
 ```terminal
 cd api
 npm install
 npm run dev
 ```
+
+Note: add the provided OpenAI API key to the `api/.env` file
 
 ## Task Instructions
 
